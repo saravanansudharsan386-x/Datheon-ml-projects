@@ -7,8 +7,8 @@ Machine-learning evaluation notebooks built for the Datheon internship. Each not
 | # | Notebook | Problem | Models |
 |---|----------|---------|--------|
 | 1 | `task1_iris_classification.ipynb` | Iris species classification | Logistic Regression, Decision Tree |
-| 2 | `task2_housing_regression.ipynb` | California Housing price prediction (coming soon) | OLS, Ridge, Lasso |
-| 3 | `task3_churn_classification.ipynb` | Telco customer churn (coming soon) | Random Forest, XGBoost |
+| 2 | `task2_housing_regression.ipynb` | California Housing price prediction ) | OLS, Ridge, Lasso |
+| 3 | `task3_churn_classification.ipynb` | Telco customer churn  | Random Forest, XGBoost |
 
 ## Task 1: Iris Classification
 
@@ -24,6 +24,22 @@ Key observations:
 - Versicolor and virginica overlap slightly, so all errors happen between those two classes.
 - Logistic Regression draws straight (linear) boundaries, while the Decision Tree draws axis-aligned boxes.
 - 5-fold cross-validation is included to check the result is not a lucky split.
+- 
+  ## Task 2: California Housing Regression
+
+Test-set results (20% hold-out, 13 features including 5 engineered interaction features):
+
+| Model | RMSE | MAE | R² |
+|-------|------|-----|----|
+| OLS | 0.6770 | 0.4856 | 0.6502 |
+| Ridge (tuned) | 0.6771 | 0.4856 | 0.6502 |
+| Lasso (tuned) | 0.6768 | 0.4858 | 0.6505 |
+
+Key observations:
+- All three models are nearly tied; regularisation helps little because the data is well-conditioned.
+- Latitude and Longitude are strongly correlated (-0.92), which makes OLS coefficients unstable.
+- Lasso removed AveRooms and Lat_x_Lon (set to zero).
+- Residuals are centred on zero; the $500k price cap causes a visible streak, and expensive districts are under-predicted.
 
 ## Installation
 
