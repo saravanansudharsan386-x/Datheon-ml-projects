@@ -41,6 +41,20 @@ Key observations:
 - Lasso removed AveRooms and Lat_x_Lon (set to zero).
 - Residuals are centred on zero; the $500k price cap causes a visible streak, and expensive districts are under-predicted.
 
+## Task 3: Customer Churn Prediction
+
+Test-set results (stratified 20% hold-out, 26.5% churn rate):
+
+| Model | ROC-AUC | Churn recall |
+|-------|---------|--------------|
+| Random Forest (no balancing) | 0.838 | 0.51 |
+| Random Forest + SMOTE | 0.834 | 0.55 |
+| XGBoost (scale_pos_weight) | 0.840 | 0.77 |
+
+Key observations:
+- All models exceed the 0.80 ROC-AUC target.
+- Balancing the classes raises churn recall sharply (0.51 to 0.77 with XGBoost) at the cost of precision.
+- Month-to-month contract is the strongest churn predictor in both models.
 ## Installation
 
 Requires Python 3.9 or newer.
